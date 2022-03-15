@@ -14,3 +14,6 @@
 <p>
   <a href="/places">Back to All Places</a>
 </p>
+
+<p><a href="/places/<%= @cplace.id %>/edit">Edit</a></p>
+<p><%= button_to "Delete this place", @place, method: :delete %></p>
