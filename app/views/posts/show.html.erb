@@ -1,0 +1,51 @@
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.date "posted_on"
+    t.integer "place_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+
+
+
+<h1><%= @post.title %></h1>
+
+<ul>
+  <li>Email: <%= @post.description %></li>
+  <li>Phone: <%= @post.posted_on %></li>
+</ul>
+
+<p><a href="/places/<%= @post.place.id %>">Back to <%= @post.place.name %></a></p>
+
+<% if @current_user %>
+  <h3>Sales Activity</h3>
+
+  <ul>
+    <% for activity in @post.activities.where({ user_id: session[:user_id] }) %>
+      <li>
+        <%= activity.activity_type %>
+        with <%= activity.post.title %>
+        <br>
+        <%= activity.note %>
+      </li>
+    <% end %>
+  </ul>
+
+  <h4>New Sales Activity</h4>
+
+  <%= form_with model: @activity do |form| %>
+    <%= form.hidden_field "post" %>
+    <p>
+      <%= form.select "activity_type", ["call", "email", "meeting"] %>
+      with <%= @post.title %>
+    </p>
+    <p>
+      <%= form.label "note" %>
+      <%= form.text_area "note" %>
+    </p>
+    <%= form.submit %>
+  <% end %>
+<% end %>

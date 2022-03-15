@@ -12,7 +12,7 @@
   <body>
     <p>
       <% if @current_user %>
-        Welcome <%= @current_user.first_name %>
+        Welcome <%= @current_user.username %>
         <%= button_to "Logout", "/sessions/logout", method: :delete %>
       <% else %>
         <a href="/sessions/new">Login</a> | <a href="/users/new">Signup</a>
