@@ -2,6 +2,19 @@
 
 <% if @current_user %>
   <%= form_with model: @post do |form| %>
+
+
+
+  <p>
+    <%= form.label "name" %>
+    <%= form.text_field "name" %>
+  </p>
+  
+  <p>
+    <%= form.label "date" %>
+    <%= form.date_field "date" %>
+  </p>
+
     <div class="mb-3">
       <%= form.label "body", class: "form-label" %>
       <%= form.text_field "body", class: "form-control" %>
